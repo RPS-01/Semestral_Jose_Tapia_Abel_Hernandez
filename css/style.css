@@ -1,0 +1,321 @@
+body{
+    background-color: #E4E4DC;
+    /*background-image: url(../img/universo.jpg);*/
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    font-family: 'Beau Rivage', cursive;
+
+}
+.logotitle{
+    font-size: 50px;
+    color: #fff;
+    text-shadow: 2px 2px #000;
+    background-color: #90D890;
+    margin-bottom: 10px;
+    width: 100%;
+    position: relative;
+    right: 0;
+    
+    display: inline;
+}
+.logotitle img{
+    width: 5%;
+}
+.logotitle div h1{
+    position: relative;
+    top: 0;
+    left: 0;
+    display: inline;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.idiomas{
+    position: relative;
+}
+
+.esp{
+    position: absolute;
+    top: 0;
+    right:4.5%;
+}
+.eng{
+    position: absolute;
+    top: 0;
+    right:1%;
+}
+
+
+.mainhoroscope{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    box-shadow: 0px 0px 5px #ccc;
+}
+.mainimg{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+}
+.horoscope-details{
+    width: 100%;
+    height: auto;
+
+    padding: 10px;
+    box-shadow: 0px 0px 5px #ccc;
+}
+.signimg{
+    width: 20%;
+    height: auto;
+    padding: 10px;
+    margin: auto;
+    display: block;
+}
+.form{
+    
+    width: 500px;
+    margin: 0 0;
+    padding: 25px;
+}
+
+.divform{
+    width: 500px;
+    padding: 10px;
+    margin: auto;
+    display: block;
+}
+
+
+.head{
+    font-family: 'Lobster', cursive;
+    color: #2c3e50;
+    max-width: 600px; 
+    margin: 0;
+}
+.head1{
+    font-family: 'Lobster', cursive;
+    color: #2c3e50;
+    max-width: 500px; 
+    margin: 0;
+}
+.resp{
+    border-style: groove;
+    border-width: 10px;
+    border-color: #333;
+    width: 100%;
+}
+.desc-text{
+    margin-top: 1%;
+}
+.box-div{
+    display: inline-block;
+    margin-top: 0%;
+}
+.box-div2{
+    display: inline-block;
+    margin-left: 80px;
+    width: 100%;
+}
+.box-div3{
+    display: inline-block;
+    max-width: 300px;
+    margin-left: 500px;
+}
+
+
+.three h1 {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.5em;
+    padding-bottom: 15px;
+    position: relative;
+  }
+  .three h1:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 5px;
+    width: 55px;
+    background-color: #111;
+  }
+  .three h1:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 2px;
+    height: 1px;
+    width: 95%;
+    max-width: 255px;
+    background-color: #333;
+  }
+
+
+.navbar {
+    background-color: #3e995b;
+    border-color: #2c3e50;
+    text-align: center;
+}
+.navcontent {
+    overflow: hidden;
+    font-size: 30px;
+    top: 0;
+    text-align: center;
+    left: 50;
+    right: 50;
+    width: 100%;
+    background-color: #9BD39B;
+   
+}
+.navcontent div ul li a{
+    text-align: center;
+     color: white;
+}
+.error{
+    width: 100%;
+    color: red;
+    font-size: 2rem;
+    text-align: center;
+}
+.opcion{
+    text-align: center;
+    margin: 15px auto;
+    padding: 15px;
+    width: 75%;
+    height: 50%;
+    background: #3e995b;
+    transition: all .3s ease-in-out;
+}
+.opcion:hover {
+    -ms-transform: scale(1.2); /* IE 9 */
+    -webkit-transform: scale(1.2); /* Safari 3-8 */
+    transform: scale(1.2); 
+  }
+a { color:red; 
+    width: 75%;
+    height: 50%;}
+a:hover { 
+    color:white;
+    text-decoration: none;
+}
+.navlink{
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+.header-text p{
+    color: rgb(206, 192, 192);
+    text-align: center;
+    font-size: 40px;
+}
+.header-text .subtitle{
+    color: white;
+}
+
+
+
+.mainheader{
+    margin-top: 25px;
+    padding: 0;
+    border-color: #080808;
+    color: #ffff;
+    padding: 70px 70px 70px 70px;
+    max-width: 100%;
+
+} 
+header{
+    background-color: #90D890;
+
+}
+.title{
+    font-size: 50px;
+    color: #eaeaea;
+    text-align: center;
+    font-weight: 300;
+}
+
+.header-text {
+    text-align: center;
+    color: #121212;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.form-style-5{
+    width: 18%;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    margin: 10px auto;
+    padding: 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+}
+.form-style-5 fieldset{
+    border: none;
+}
+.form-style-5 legend {
+    font-size: 2.4em;
+    margin-bottom: 10px;
+}
+.form-style-5 label {
+    display: block;
+    font-size: 35px;
+}
+.form-style-5 input[type="text"],
+.form-style-5 input[type="date"],
+.form-style-5 input[type="datetime"],
+.form-style-5 input[type="email"],
+.form-style-5 input[type="number"],
+.form-style-5 input[type="search"],
+.form-style-5 input[type="time"],
+.form-style-5 input[type="url"],
+.form-style-5 input[type="password"],
+.form-style-5 textarea,
+.form-style-5 select {
+    background: rgba(255,255,255,.1);
+    border: none;
+    border-radius: 4px;
+    font-size: 26px;
+    margin: 0;
+    outline: 0;
+    padding: 7px;
+    width: 100%;
+    box-sizing: border-box; 
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; 
+    background-color: #e8eeef;
+    color:#8a97a0;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    margin-bottom: 30px;
+    
+}
+.form-style-5 input[type="text"]:focus,
+.form-style-5 input[type="date"]:focus,
+.form-style-5 input[type="datetime"]:focus,
+.form-style-5 input[type="email"]:focus,
+.form-style-5 input[type="number"]:focus,
+.form-style-5 input[type="search"]:focus,
+.form-style-5 input[type="time"]:focus,
+.form-style-5 input[type="url"]:focus,
+.form-style-5 textarea:focus,
+.form-style-5 select:focus{
+    background: #d2d9dd;
+}
+.form-style-5 select{
+    -webkit-appearance: menulist-button;
+    height:35px;
+}
+.submitbutton{
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 35px;
+}
+.form-group p{
+    font-size: 30px;
+}
