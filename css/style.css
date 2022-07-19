@@ -18,8 +18,17 @@ body{
     width: 100%;
     position: relative;
     right: 0;
-    
-    display: inline;
+    display: block; 
+}
+.user{
+    font-size: 35px;
+    color: #fff;
+    text-align: right;
+    font-weight: 300;
+    text-shadow: none;
+    position: absolute;
+    top: 0;
+    right: 10px;
 }
 .logotitle img{
     width: 5%;
@@ -234,10 +243,11 @@ header{
 }
 .title{
     font-size: 50px;
-    color: #eaeaea;
+    color: #949494;
     text-align: center;
     font-weight: 300;
 }
+
 
 .header-text {
     text-align: center;
@@ -318,4 +328,13 @@ header{
 }
 .form-group p{
     font-size: 30px;
+}
+
+footer{
+    background-color: #3e995b;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    bottom: 0;
 }

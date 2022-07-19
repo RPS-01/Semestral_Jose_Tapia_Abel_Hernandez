@@ -1,6 +1,7 @@
 <?php
 include("plantilla/encabezado.php");
 include("class/Presion.php");
+session_start();
 encabezado();
 $sistolica = $_POST['sistolica'];
 $diastolica = $_POST['diastolica'];

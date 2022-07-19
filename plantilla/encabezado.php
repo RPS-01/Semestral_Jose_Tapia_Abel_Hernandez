@@ -26,9 +26,12 @@ function encabezado()
                     <div class="col-md-12 logotitle">
                         <img src="img/logo.png" alt="logo" class="logo">
                         <h1 class="title">Consultorio ABC</h1>
+                        <?php 
+                        if(!empty($_SESSION['usuario'])){
+                            echo'<h2 class="user">Bienvenido '.$_SESSION['usuario'].'</br><a href="logout.php">Cerrar sesion</a></h2>';
+                        }
+                        ?>
                     </div>
-
-
                 </div>
                 <nav class="navbar navcontent navbar-expand-lg ">
                     <div class="collapse justify-content-center  navbar-collapse" id="navbarNav">
@@ -60,7 +63,13 @@ function encabezado()
                         <h1 class="title">Servicios</h1>
                         <p> Para realizar sus pruebas de Indice de masa corporal, Glucosa en Sangre y presion Arterial primero debe iniciar sesion</p>
                         <p class="subtitle">Ingrese a su cuenta</p>
-                        <a href="login.php" class="btn submitbutton btn-primary btn-sm">Iniciar Sesion</a>
+                        <?php 
+                        if(!empty($_SESSION['usuario'])){?>
+                            <a href="opciones.php" class="btn submitbutton btn-primary btn-sm">Nuestros servicios</a>
+                        <?php } 
+                        else{?>
+                            <a href="login.php" class="btn submitbutton btn-primary btn-sm">Iniciar Sesion</a>
+                        <?php } ?>
                     </div>
                     <!-- Button -->
 
@@ -138,6 +147,7 @@ function encabezado()
                     </div>
                     <div class="form-group">
                         <input type="submit" name="enviar" value="Enviar" />
+                    </div>    
                 </form>
             </div>
         </div>
@@ -167,21 +177,21 @@ function encabezado()
                     </li>
                 </ul>
             </div>
-
         </div>
+    </div>
 
 
-    <?php } ?>
+<?php } ?>
 
-    <?php function glucosa()
+<?php function glucosa()
     { ?>
         <div class="container form-style-5">
             <div class="row ">
                 <div class="col-md-12 divform ">
-                    <h1 class="title">glucosa</h1>
+                    <h1 class="title">Glucosa</h1>
                     <form action="glucosaResultados.php" method="POST">
                         <div class="form-group">
-                            <label for="glucosa">glucosa</label>
+                            <label for="glucosa">Glucosa</label>
                             <input type="number" class="form-control" id="glucosa" name="glucosa" placeholder="Glucosa">
                             <p>Seleccione cuando se realizo la prueba:</p>
                               <label for="no">Dos horas despues de comer</label><br>
@@ -194,9 +204,9 @@ function encabezado()
                 </div>
             </div>
         </div>
-    <?php } ?>
+<?php } ?>
 
-    <?php function presion()
+<?php function presion()
     { ?>
         <div class="container form-style-5">
             <div class="row ">
@@ -214,9 +224,10 @@ function encabezado()
                         <button type="submit button" class="btn sumbitbutton btn-primary btn-lg">Enviar</button>
                 </div>
             </div>
-        <?php } ?>
+        </div>
+<?php } ?>
 
-        <?php function imc()
+<?php function imc()
         { ?>
             <div class="container form-style-5">
                 <div class="row ">
@@ -234,9 +245,10 @@ function encabezado()
                             <button type="submit button" class="btn sumbitbutton btn-primary btn-lg">Enviar</button>
                     </div>
                 </div>
-            <?php } ?>
+            </div>
+<?php } ?>
 
-            <?php function ResultadosGlucosa($glucosa, $resultado)
+<?php function ResultadosGlucosa($glucosa, $resultado)
             { ?>
                 <div class="container form-style-5">
                     <div class="row ">
@@ -247,9 +259,9 @@ function encabezado()
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+<?php } ?>
 
-            <?php function ResultadosIMC($peso, $altura, $resultado, $imc)
+<?php function ResultadosIMC($peso, $altura, $resultado, $imc)
             { ?>
                 <div class="container form-style-5">
                     <div class="row ">
@@ -261,9 +273,9 @@ function encabezado()
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+<?php } ?>
 
-            <?php function ResultadosPresion($sistolica, $diastolica, $resultado)
+<?php function ResultadosPresion($sistolica, $diastolica, $resultado)
             { ?>
                 <div class="container form-style-5">
                     <div class="row ">
@@ -275,9 +287,9 @@ function encabezado()
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+<?php } ?>
 
-            <?php function pie()
+<?php function pie()
             { ?>
                 <footer>
                     <div class="container">
@@ -361,7 +373,11 @@ function encabezado()
             <div class="row">
                 <div class="col-md-12">
                     <p> 2022 - Elaborado por Jose Tapia y Abel Hernandez</a></p>
-                    <?php echo $mensaje ?>
+                    
+                    <?php 
+                    echo $mensaje;
+
+                    ?>
                 </div>
             </div>
         </div>
@@ -370,3 +386,4 @@ function encabezado()
 
     </html>
 <?php } ?>
+
