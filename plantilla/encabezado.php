@@ -286,22 +286,22 @@ function encabezado()
     $telefono = $row['telefono'];
     $cedula = $row['cedula'];
     $imc_query = "SELECT * FROM `imc` WHERE cedula='$cedula'";
-    $result = mysqli_query($con, $imc_query) or die(mysqli_error($con));
-    $row = mysqli_fetch_array($result);
-    $imc = $row['imc'];
-    $peso = $row['peso'];
-    $altura = $row['altura'];
+    $result_imc = mysqli_query($con, $imc_query) or die(mysqli_error($con));
+    $row_imc = mysqli_fetch_array($result_imc);
+    $imc = $row_imc['imc'];
+    $peso = $row_imc['peso'];
+    $altura = $row_imc['altura'];
     $glucosa_query = "SELECT * FROM `glucosa` WHERE cedula='$cedula'";
-    $result = mysqli_query($con, $glucosa_query) or die(mysqli_error($con));
-    $row = mysqli_fetch_array($result);
-    $glucosa = $row['glucosa'];
-    $ayuno = $row['ayuna'];
+    $result_glucosa = mysqli_query($con, $glucosa_query) or die(mysqli_error($con));
+    $row_glucosa = mysqli_fetch_array($result_glucosa);
+    $glucosa = $row_glucosa['glucosa'];
+    $ayuno = $row_glucosa['ayuna'];
     $presion_query = "SELECT * FROM `presion` WHERE cedula='$cedula'";
-    $result = mysqli_query($con, $presion_query) or die(mysqli_error($con));
-    $row = mysqli_fetch_array($result);
-    $presion = $row['presion'];
-    $sistolica = $row['sistolica'];
-    $diastolica = $row['diastolica'];
+    $result_presion = mysqli_query($con, $presion_query) or die(mysqli_error($con));
+    $row_presion = mysqli_fetch_array($result_presion);
+    $presion = $row_presion['presion'];
+    $sistolica = $row_presion['sistolica'];
+    $diastolica = $row_presion['diastolica'];
 
     ?>
     <div class="container form-style-4">
@@ -327,10 +327,15 @@ function encabezado()
                     <tr>
                         <td class="resul" colspan="3">Altura:<?php echo $altura ?>m </td>
                     </tr>
-                    <tr>
-                        <td class="resul" colspan="3">Sus Resultados:<?php echo $imc ?>% </td>
-                    </tr>
+                    <?php
+                    $imc_query = "SELECT imc,fecha FROM `imc` WHERE cedula='$cedula'";
+                    $result_imc = mysqli_query($con, $imc_query) or die(mysqli_error($con));
+                    while ($fila = $result_imc->fetch_array(MYSQLI_ASSOC)) { ?>
+                        <tr>
+                            <td class="resul" colspan="3">Resultados del <?php echo $fila['fecha']  ?> :<?php echo $fila['imc'] ?> </td>
+                        </tr>
 
+                    <?php } ?>
                     <tr>
                         <td colspan="3">Firma</td>
                     </tr>
@@ -360,10 +365,15 @@ function encabezado()
                     <tr>
                         <td class="resul" colspan="2">Presión diastólica : <?php echo $diastolica ?> </td>
                     </tr>
-                    <tr>
-                        <td class="resul" colspan="3">Sus Resultados: <?php echo $presion ?> </td>
-                    </tr>
+                    <?php
+                    $presion_query = "SELECT presion,fecha FROM `presion` WHERE cedula='$cedula'";
+                    $result_presion = mysqli_query($con, $presion_query) or die(mysqli_error($con));
+                    while ($fila = $result_presion->fetch_array(MYSQLI_ASSOC)) { ?>
+                        <tr>
+                            <td class="resul" colspan="3">Resultados del <?php echo $fila['fecha']  ?> :<?php echo $fila['presion'] ?> </td>
+                        </tr>
 
+                    <?php } ?>
                     <tr>
                         <td colspan="3">Firma</td>
                     </tr>
@@ -390,9 +400,14 @@ function encabezado()
                     <tr>
                         <td class="resul" colspan="3">Ayuno: <?php echo $ayuno ?></td>
                     </tr>
-                    <tr>
-                        <td class="resul" colspan="3">Sus Resultados: <?php echo $glucosa ?></td>
-                    </tr>
+                    <?php
+                    $glucosa_query = "SELECT glucosa,fecha FROM `glucosa` WHERE cedula='$cedula'";
+                    $result_glucosa = mysqli_query($con, $glucosa_query) or die(mysqli_error($con));
+                    while ($fila = $result_glucosa->fetch_array(MYSQLI_ASSOC)) { ?>
+                        <tr>
+                            <td class="resul" colspan="3">Resultados del <?php echo $fila['fecha']  ?> :<?php echo $fila['glucosa'] ?> </td>
+                        </tr>
+                    <?php } ?>
 
                     <tr>
                         <td colspan="3">Firma</td>

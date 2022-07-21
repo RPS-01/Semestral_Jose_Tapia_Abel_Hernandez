@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-07-2022 a las 02:56:53
+-- Tiempo de generación: 21-07-2022 a las 06:25:37
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -24,15 +24,16 @@ SET time_zone = "+00:00";
 CREATE TABLE `glucosa` (
   `glucosa` float NOT NULL,
   `ayuna` varchar(15) NOT NULL,
-  `cedula` varchar(20) NOT NULL
+  `cedula` varchar(20) NOT NULL,
+  `fecha` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `glucosa`
 --
 
-INSERT INTO `glucosa` (`glucosa`, `ayuna`, `cedula`) VALUES
-(220, 'no', '8-972-514');
+INSERT INTO `glucosa` (`glucosa`, `ayuna`, `cedula`, `fecha`) VALUES
+(220, 'no', '8-972-514', '2022-07-20');
 
 -- --------------------------------------------------------
 
@@ -44,15 +45,17 @@ CREATE TABLE `imc` (
   `peso` float NOT NULL,
   `altura` float NOT NULL,
   `cedula` varchar(20) NOT NULL,
-  `imc` float NOT NULL
+  `imc` float NOT NULL,
+  `fecha` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `imc`
 --
 
-INSERT INTO `imc` (`peso`, `altura`, `cedula`, `imc`) VALUES
-(85, 1.8, '8-972-514', 26.2);
+INSERT INTO `imc` (`peso`, `altura`, `cedula`, `imc`, `fecha`) VALUES
+(85, 1.8, '8-972-514', 26.2, '2022-07-20'),
+(89.6, 1.8, '8-972-514', 27.7, '2022-07-20');
 
 -- --------------------------------------------------------
 
@@ -64,15 +67,17 @@ CREATE TABLE `presion` (
   `sistolica` int(5) NOT NULL,
   `diastolica` int(5) NOT NULL,
   `cedula` varchar(20) NOT NULL,
-  `presion` varchar(30) NOT NULL
+  `presion` varchar(30) NOT NULL,
+  `fecha` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `presion`
 --
 
-INSERT INTO `presion` (`sistolica`, `diastolica`, `cedula`, `presion`) VALUES
-(115, 75, '8-972-514', 'Normal');
+INSERT INTO `presion` (`sistolica`, `diastolica`, `cedula`, `presion`, `fecha`) VALUES
+(115, 75, '8-972-514', 'Normal', '2022-07-20'),
+(185, 68, '8-972-514', 'Crisis de Hipertensión', '2022-07-20');
 
 -- --------------------------------------------------------
 
