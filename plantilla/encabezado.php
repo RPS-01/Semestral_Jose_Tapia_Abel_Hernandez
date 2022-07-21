@@ -287,7 +287,7 @@ function encabezado()
                         <a class="navlink" href="resultados_mensual.php">Mensual</a>
                     </li>
                 </ul>
-            </div>  
+            </div>
         </div>
     </div>
 
@@ -306,23 +306,27 @@ function encabezado()
     $apellido = $row['apellido'];
     $telefono = $row['telefono'];
     $cedula = $row['cedula'];
+
     $imc_query = "SELECT * FROM `imc` WHERE cedula='$cedula'";
     $result_imc = mysqli_query($con, $imc_query) or die(mysqli_error($con));
-    $row_imc = mysqli_fetch_array($result_imc);
-    $imc = $row_imc['imc'];
-    $peso = $row_imc['peso'];
-    $altura = $row_imc['altura'];
+    if ($row_imc = mysqli_fetch_array($result_imc)) {
+        $imc = $row_imc['imc'];
+        $peso = $row_imc['peso'];
+        $altura = $row_imc['altura'];
+    }
     $glucosa_query = "SELECT * FROM `glucosa` WHERE cedula='$cedula'";
     $result_glucosa = mysqli_query($con, $glucosa_query) or die(mysqli_error($con));
-    $row_glucosa = mysqli_fetch_array($result_glucosa);
-    $glucosa = $row_glucosa['glucosa'];
-    $ayuno = $row_glucosa['ayuna'];
+    if ($row_glucosa = mysqli_fetch_array($result_glucosa)) {
+        $glucosa = $row_glucosa['glucosa'];
+        $ayuno = $row_glucosa['ayuna'];
+    }
     $presion_query = "SELECT * FROM `presion` WHERE cedula='$cedula'";
     $result_presion = mysqli_query($con, $presion_query) or die(mysqli_error($con));
-    $row_presion = mysqli_fetch_array($result_presion);
-    $presion = $row_presion['presion'];
-    $sistolica = $row_presion['sistolica'];
-    $diastolica = $row_presion['diastolica'];
+    if ($row_presion = mysqli_fetch_array($result_presion)) {
+        $presion = $row_presion['presion'];
+        $sistolica = $row_presion['sistolica'];
+        $diastolica = $row_presion['diastolica'];
+    }
 
     ?>
     <div class="container form-style-4">
@@ -342,12 +346,20 @@ function encabezado()
                                                 ?>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="resul" colspan="3">Peso:<?php echo $peso ?>kg </td>
-                    </tr>
-                    <tr>
-                        <td class="resul" colspan="3">Altura:<?php echo $altura ?>m </td>
-                    </tr>
+                    <?php
+                    if ($row_imc = mysqli_fetch_array($result_imc)) {
+                    ?>
+                        <tr>
+                            <td class="resul" colspan="3">Peso:<?php echo $peso ?>kg </td>
+                        </tr>
+                        <tr>
+                            <td class="resul" colspan="3">Altura:<?php echo $altura ?>m </td>
+                        </tr>
+                    <?php } else { ?>
+                        <tr>
+                            <td class="resul" colspan="3">No hay resultados</td>
+                        </tr>
+                    <?php } ?>
                     <?php
 
                     $last_week = strtotime("-1 week");
@@ -359,6 +371,7 @@ function encabezado()
                         </tr>
 
                     <?php } ?>
+
                     <tr>
                         <td colspan="3">Firma</td>
                     </tr>
@@ -382,12 +395,20 @@ function encabezado()
                                                 ?>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="resul" colspan="1">Presión sistólica: <?php echo $sistolica ?> </td>
-                    </tr>
-                    <tr>
-                        <td class="resul" colspan="2">Presión diastólica : <?php echo $diastolica ?> </td>
-                    </tr>
+                    <?php
+                    if ($row_imc = mysqli_fetch_array($result_presion)) {
+                    ?>
+                        <tr>
+                            <td class="resul" colspan="1">Presión sistólica: <?php echo $sistolica ?> </td>
+                        </tr>
+                        <tr>
+                            <td class="resul" colspan="2">Presión diastólica : <?php echo $diastolica ?> </td>
+                        </tr>
+                    <?php } else { ?>
+                        <tr>
+                            <td class="resul" colspan="3">No hay resultados</td>
+                        </tr>
+                    <?php } ?>
                     <?php
                     $presion_query = "SELECT presion,fecha FROM `presion` WHERE cedula='$cedula' and DATE(fecha) >= CURDATE() - INTERVAL 7 DAY";
                     $result_presion = mysqli_query($con, $presion_query) or die(mysqli_error($con));
@@ -420,9 +441,17 @@ function encabezado()
                                                 ?>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="resul" colspan="3">Ayuno: <?php echo $ayuno ?></td>
-                    </tr>
+                    <?php
+                    if ($row_imc = mysqli_fetch_array($result_glucosa)) {
+                    ?>
+                        <tr>
+                            <td class="resul" colspan="3">Ayuno: <?php echo $ayuno ?></td>
+                        </tr>
+                    <?php } else { ?>
+                        <tr>
+                            <td class="resul" colspan="3">No hay resultados</td>
+                        </tr>
+                    <?php } ?>
                     <?php
                     $glucosa_query = "SELECT glucosa,fecha FROM `glucosa` WHERE cedula='$cedula' and DATE(fecha) >= CURDATE() - INTERVAL 7 DAY";
                     $result_glucosa = mysqli_query($con, $glucosa_query) or die(mysqli_error($con));
@@ -454,23 +483,27 @@ function encabezado()
     $apellido = $row['apellido'];
     $telefono = $row['telefono'];
     $cedula = $row['cedula'];
+
     $imc_query = "SELECT * FROM `imc` WHERE cedula='$cedula'";
     $result_imc = mysqli_query($con, $imc_query) or die(mysqli_error($con));
-    $row_imc = mysqli_fetch_array($result_imc);
-    $imc = $row_imc['imc'];
-    $peso = $row_imc['peso'];
-    $altura = $row_imc['altura'];
+    if ($row_imc = mysqli_fetch_array($result_imc)) {
+        $imc = $row_imc['imc'];
+        $peso = $row_imc['peso'];
+        $altura = $row_imc['altura'];
+    }
     $glucosa_query = "SELECT * FROM `glucosa` WHERE cedula='$cedula'";
     $result_glucosa = mysqli_query($con, $glucosa_query) or die(mysqli_error($con));
-    $row_glucosa = mysqli_fetch_array($result_glucosa);
-    $glucosa = $row_glucosa['glucosa'];
-    $ayuno = $row_glucosa['ayuna'];
+    if ($row_glucosa = mysqli_fetch_array($result_glucosa)) {
+        $glucosa = $row_glucosa['glucosa'];
+        $ayuno = $row_glucosa['ayuna'];
+    }
     $presion_query = "SELECT * FROM `presion` WHERE cedula='$cedula'";
     $result_presion = mysqli_query($con, $presion_query) or die(mysqli_error($con));
-    $row_presion = mysqli_fetch_array($result_presion);
-    $presion = $row_presion['presion'];
-    $sistolica = $row_presion['sistolica'];
-    $diastolica = $row_presion['diastolica'];
+    if ($row_presion = mysqli_fetch_array($result_presion)) {
+        $presion = $row_presion['presion'];
+        $sistolica = $row_presion['sistolica'];
+        $diastolica = $row_presion['diastolica'];
+    }
 
     ?>
     <div class="container form-style-4">
@@ -490,12 +523,21 @@ function encabezado()
                                                 ?>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="resul" colspan="3">Peso:<?php echo $peso ?>kg </td>
-                    </tr>
-                    <tr>
-                        <td class="resul" colspan="3">Altura:<?php echo $altura ?>m </td>
-                    </tr>
+
+                    <?php
+                    if ($row_imc = mysqli_fetch_array($result_imc)) {
+                    ?>
+                        <tr>
+                            <td class="resul" colspan="3">Peso:<?php echo $peso ?>kg </td>
+                        </tr>
+                        <tr>
+                            <td class="resul" colspan="3">Altura:<?php echo $altura ?>m </td>
+                        </tr>
+                    <?php } else { ?>
+                        <tr>
+                            <td class="resul" colspan="3">No hay resultados</td>
+                        </tr>
+                    <?php } ?>
                     <?php
                     $imc_query = "SELECT imc,fecha FROM `imc` WHERE cedula='$cedula' and DATE(fecha) >= CURDATE() - INTERVAL 30 DAY";
                     $result_imc = mysqli_query($con, $imc_query) or die(mysqli_error($con));
@@ -528,12 +570,20 @@ function encabezado()
                                                 ?>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="resul" colspan="1">Presión sistólica: <?php echo $sistolica ?> </td>
-                    </tr>
-                    <tr>
-                        <td class="resul" colspan="2">Presión diastólica : <?php echo $diastolica ?> </td>
-                    </tr>
+                    <?php
+                    if ($row_imc = mysqli_fetch_array($result_presion)) {
+                    ?>
+                        <tr>
+                            <td class="resul" colspan="1">Presión sistólica: <?php echo $sistolica ?> </td>
+                        </tr>
+                        <tr>
+                            <td class="resul" colspan="2">Presión diastólica : <?php echo $diastolica ?> </td>
+                        </tr>
+                    <?php } else { ?>
+                        <tr>
+                            <td class="resul" colspan="3">No hay resultados</td>
+                        </tr>
+                    <?php } ?>
                     <?php
                     $presion_query = "SELECT presion,fecha FROM `presion` WHERE cedula='$cedula' and DATE(fecha) >= CURDATE() - INTERVAL 30 DAY";
                     $result_presion = mysqli_query($con, $presion_query) or die(mysqli_error($con));
@@ -566,9 +616,17 @@ function encabezado()
                                                 ?>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="resul" colspan="3">Ayuno: <?php echo $ayuno ?></td>
-                    </tr>
+                    <?php
+                    if ($row_imc = mysqli_fetch_array($result_glucosa)) {
+                    ?>
+                        <tr>
+                            <td class="resul" colspan="3">Ayuno: <?php echo $ayuno ?></td>
+                        </tr>
+                    <?php } else { ?>
+                        <tr>
+                            <td class="resul" colspan="3">No hay resultados</td>
+                        </tr>
+                    <?php } ?>
                     <?php
                     $glucosa_query = "SELECT glucosa,fecha FROM `glucosa` WHERE cedula='$cedula' and DATE(fecha) >= CURDATE() - INTERVAL 30 DAY";
                     $result_glucosa = mysqli_query($con, $glucosa_query) or die(mysqli_error($con));
