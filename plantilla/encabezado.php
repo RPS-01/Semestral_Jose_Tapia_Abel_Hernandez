@@ -135,7 +135,7 @@ function encabezado()
                 $_SESSION['usuario'] = $row['nombre'];
                 $_SESSION['cedula'] = $row['cedula'];
                 $_SESSION['apellido'] = $row['apellido'];
-                // Redirect to user dashboard page
+
                 header("Location: opciones.php");
             }
         } else {
@@ -190,7 +190,7 @@ function encabezado()
                 $_SESSION['usuario'] = $nombre;
                 $_SESSION['cedula'] = $cedula;
                 $_SESSION['apellido'] = $apellido;
-                // Redirect to user dashboard page
+
                 header("Location: opciones.php");
             
             echo "<div class='form'>
