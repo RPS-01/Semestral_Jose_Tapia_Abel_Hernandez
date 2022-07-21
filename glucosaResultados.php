@@ -1,6 +1,6 @@
 <?php
 include("plantilla/encabezado.php");
-require('db.php');
+    require('db.php');
 include("class/Glucosa.php");
 session_start();
 encabezado();
