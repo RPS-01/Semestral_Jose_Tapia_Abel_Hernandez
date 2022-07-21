@@ -273,7 +273,7 @@ function encabezado()
 <?php } ?>
 
 
-<?php function resultados_semanal()
+<?php function resultados()
 { ?>
     <div class="container form-style-5">
         <div class="row ">
@@ -281,10 +281,10 @@ function encabezado()
                 <h1 class="title">Escoga el tipo de reporte que desea</h1>
                 <ul class="navbar-nav ">
                     <li class="opcion">
-                        <a class="navlink" href="semanal.php">Semanal</a>
+                        <a class="navlink" href="resultados_semanal.php">Semanal</a>
                     </li>
                     <li class="opcion">
-                        <a class="navlink" href="mensual.php">Mensual</a>
+                        <a class="navlink" href="resultados_mensual.php">Mensual</a>
                     </li>
                 </ul>
             </div>  
@@ -294,7 +294,7 @@ function encabezado()
 
 <?php } ?>
 
-<?php function x()
+<?php function resultados_semanal()
 { ?>
     <?php
     require('db.php');
@@ -349,7 +349,9 @@ function encabezado()
                         <td class="resul" colspan="3">Altura:<?php echo $altura ?>m </td>
                     </tr>
                     <?php
-                    $imc_query = "SELECT imc,fecha FROM `imc` WHERE cedula='$cedula' and fecha between date_sub(now(),INTERVAL 1 WEEK) and now();'";
+
+                    $last_week = strtotime("-1 week");
+                    $imc_query = "SELECT imc,fecha FROM `imc` WHERE cedula='$cedula' and DATE(fecha) >= CURDATE() - INTERVAL 7 DAY";
                     $result_imc = mysqli_query($con, $imc_query) or die(mysqli_error($con));
                     while ($fila = $result_imc->fetch_array(MYSQLI_ASSOC)) { ?>
                         <tr>
@@ -387,7 +389,7 @@ function encabezado()
                         <td class="resul" colspan="2">Presión diastólica : <?php echo $diastolica ?> </td>
                     </tr>
                     <?php
-                    $presion_query = "SELECT presion,fecha FROM `presion` WHERE cedula='$cedula'";
+                    $presion_query = "SELECT presion,fecha FROM `presion` WHERE cedula='$cedula' and DATE(fecha) >= CURDATE() - INTERVAL 7 DAY";
                     $result_presion = mysqli_query($con, $presion_query) or die(mysqli_error($con));
                     while ($fila = $result_presion->fetch_array(MYSQLI_ASSOC)) { ?>
                         <tr>
@@ -422,7 +424,7 @@ function encabezado()
                         <td class="resul" colspan="3">Ayuno: <?php echo $ayuno ?></td>
                     </tr>
                     <?php
-                    $glucosa_query = "SELECT glucosa,fecha FROM `glucosa` WHERE cedula='$cedula'";
+                    $glucosa_query = "SELECT glucosa,fecha FROM `glucosa` WHERE cedula='$cedula' and DATE(fecha) >= CURDATE() - INTERVAL 7 DAY";
                     $result_glucosa = mysqli_query($con, $glucosa_query) or die(mysqli_error($con));
                     while ($fila = $result_glucosa->fetch_array(MYSQLI_ASSOC)) { ?>
                         <tr>
@@ -495,7 +497,7 @@ function encabezado()
                         <td class="resul" colspan="3">Altura:<?php echo $altura ?>m </td>
                     </tr>
                     <?php
-                    $imc_query = "SELECT imc,fecha FROM `imc` WHERE cedula='$cedula' and fecha between date_sub(now(),INTERVAL 1 MONTH) and now();'";
+                    $imc_query = "SELECT imc,fecha FROM `imc` WHERE cedula='$cedula' and DATE(fecha) >= CURDATE() - INTERVAL 30 DAY";
                     $result_imc = mysqli_query($con, $imc_query) or die(mysqli_error($con));
                     while ($fila = $result_imc->fetch_array(MYSQLI_ASSOC)) { ?>
                         <tr>
@@ -533,7 +535,7 @@ function encabezado()
                         <td class="resul" colspan="2">Presión diastólica : <?php echo $diastolica ?> </td>
                     </tr>
                     <?php
-                    $presion_query = "SELECT presion,fecha FROM `presion` WHERE cedula='$cedula'";
+                    $presion_query = "SELECT presion,fecha FROM `presion` WHERE cedula='$cedula' and DATE(fecha) >= CURDATE() - INTERVAL 30 DAY";
                     $result_presion = mysqli_query($con, $presion_query) or die(mysqli_error($con));
                     while ($fila = $result_presion->fetch_array(MYSQLI_ASSOC)) { ?>
                         <tr>
@@ -568,7 +570,7 @@ function encabezado()
                         <td class="resul" colspan="3">Ayuno: <?php echo $ayuno ?></td>
                     </tr>
                     <?php
-                    $glucosa_query = "SELECT glucosa,fecha FROM `glucosa` WHERE cedula='$cedula'";
+                    $glucosa_query = "SELECT glucosa,fecha FROM `glucosa` WHERE cedula='$cedula' and DATE(fecha) >= CURDATE() - INTERVAL 30 DAY";
                     $result_glucosa = mysqli_query($con, $glucosa_query) or die(mysqli_error($con));
                     while ($fila = $result_glucosa->fetch_array(MYSQLI_ASSOC)) { ?>
                         <tr>
