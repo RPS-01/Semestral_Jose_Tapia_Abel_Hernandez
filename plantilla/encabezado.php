@@ -273,7 +273,7 @@ function encabezado()
 <?php } ?>
 
 
-<?php function resultados()
+<?php function resultados_semanal()
 { ?>
     <?php
     require('db.php');
@@ -328,7 +328,153 @@ function encabezado()
                         <td class="resul" colspan="3">Altura:<?php echo $altura ?>m </td>
                     </tr>
                     <?php
-                    $imc_query = "SELECT imc,fecha FROM `imc` WHERE cedula='$cedula'";
+                    $imc_query = "SELECT imc,fecha FROM `imc` WHERE cedula='$cedula' and fecha between date_sub(now(),INTERVAL 1 WEEK) and now();'";
+                    $result_imc = mysqli_query($con, $imc_query) or die(mysqli_error($con));
+                    while ($fila = $result_imc->fetch_array(MYSQLI_ASSOC)) { ?>
+                        <tr>
+                            <td class="resul" colspan="3">Resultados del <?php echo $fila['fecha']  ?> :<?php echo $fila['imc'] ?> </td>
+                        </tr>
+
+                    <?php } ?>
+                    <tr>
+                        <td colspan="3">Firma</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br><br>
+        <div class="row resultado">
+            <div class="col-md-12 ">
+                <h1 class="title">Resultados Presion</h1>
+                <table>
+                    <tr>
+                        <td colspan="3">Nombre: <?php echo $nombre . " " . $apellido ?> </td>
+                    </tr>
+                    <tr>
+                        <td class="info">Cedula: <?php echo $cedula ?></td>
+                        <td class="info">Telefono: <?php echo $telefono ?> </td>
+
+                        <td class="info">Fecha: <?php $date = date("Y-m-d");
+                                                echo $date;
+                                                ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="resul" colspan="1">Presión sistólica: <?php echo $sistolica ?> </td>
+                    </tr>
+                    <tr>
+                        <td class="resul" colspan="2">Presión diastólica : <?php echo $diastolica ?> </td>
+                    </tr>
+                    <?php
+                    $presion_query = "SELECT presion,fecha FROM `presion` WHERE cedula='$cedula'";
+                    $result_presion = mysqli_query($con, $presion_query) or die(mysqli_error($con));
+                    while ($fila = $result_presion->fetch_array(MYSQLI_ASSOC)) { ?>
+                        <tr>
+                            <td class="resul" colspan="3">Resultados del <?php echo $fila['fecha']  ?> :<?php echo $fila['presion'] ?> </td>
+                        </tr>
+
+                    <?php } ?>
+                    <tr>
+                        <td colspan="3">Firma</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br><br>
+        <div class="row resultado">
+            <div class="col-md-12 ">
+                <h1 class="title">Resultados Glucosa</h1>
+                <table>
+                    <tr>
+                        <td colspan="3">Nombre: <?php echo $nombre . " " . $apellido ?> </td>
+                    </tr>
+                    <tr>
+                        <td class="info">Cedula: <?php echo $cedula ?></td>
+                        <td class="info">Telefono: <?php echo $telefono ?> </td>
+
+                        <td class="info">Fecha: <?php $date = date("Y-m-d");
+                                                echo $date;
+                                                ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="resul" colspan="3">Ayuno: <?php echo $ayuno ?></td>
+                    </tr>
+                    <?php
+                    $glucosa_query = "SELECT glucosa,fecha FROM `glucosa` WHERE cedula='$cedula'";
+                    $result_glucosa = mysqli_query($con, $glucosa_query) or die(mysqli_error($con));
+                    while ($fila = $result_glucosa->fetch_array(MYSQLI_ASSOC)) { ?>
+                        <tr>
+                            <td class="resul" colspan="3">Resultados del <?php echo $fila['fecha']  ?> :<?php echo $fila['glucosa'] ?> </td>
+                        </tr>
+                    <?php } ?>
+
+                    <tr>
+                        <td colspan="3">Firma</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
+
+<?php function resultados_mensual()
+{ ?>
+    <?php
+    require('db.php');
+    $cedula = $_SESSION['cedula'];
+    $user_query = "SELECT * FROM `user` WHERE cedula='$cedula'";
+    $result = mysqli_query($con, $user_query) or die(mysqli_error($con));
+    $row = mysqli_fetch_array($result);
+    $nombre = $row['nombre'];
+    $apellido = $row['apellido'];
+    $telefono = $row['telefono'];
+    $cedula = $row['cedula'];
+    $imc_query = "SELECT * FROM `imc` WHERE cedula='$cedula'";
+    $result_imc = mysqli_query($con, $imc_query) or die(mysqli_error($con));
+    $row_imc = mysqli_fetch_array($result_imc);
+    $imc = $row_imc['imc'];
+    $peso = $row_imc['peso'];
+    $altura = $row_imc['altura'];
+    $glucosa_query = "SELECT * FROM `glucosa` WHERE cedula='$cedula'";
+    $result_glucosa = mysqli_query($con, $glucosa_query) or die(mysqli_error($con));
+    $row_glucosa = mysqli_fetch_array($result_glucosa);
+    $glucosa = $row_glucosa['glucosa'];
+    $ayuno = $row_glucosa['ayuna'];
+    $presion_query = "SELECT * FROM `presion` WHERE cedula='$cedula'";
+    $result_presion = mysqli_query($con, $presion_query) or die(mysqli_error($con));
+    $row_presion = mysqli_fetch_array($result_presion);
+    $presion = $row_presion['presion'];
+    $sistolica = $row_presion['sistolica'];
+    $diastolica = $row_presion['diastolica'];
+
+    ?>
+    <div class="container form-style-4">
+        <div class="row resultado">
+            <div class="col-md-12 ">
+                <h1 class="title">Resultados IMC</h1>
+                <table>
+                    <tr>
+                        <td colspan="3">Nombre: <?php echo $nombre . " " . $apellido ?> </td>
+                    </tr>
+                    <tr>
+                        <td class="info">Cedula: <br><?php echo $cedula ?></td>
+                        <td class="info">Telefono: <?php echo $telefono ?> </td>
+
+                        <td class="info">Fecha: <?php $date = date("Y-m-d");
+                                                echo $date;
+                                                ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="resul" colspan="3">Peso:<?php echo $peso ?>kg </td>
+                    </tr>
+                    <tr>
+                        <td class="resul" colspan="3">Altura:<?php echo $altura ?>m </td>
+                    </tr>
+                    <?php
+                    $imc_query = "SELECT imc,fecha FROM `imc` WHERE cedula='$cedula' and fecha between date_sub(now(),INTERVAL 1 MONTH) and now();'";
                     $result_imc = mysqli_query($con, $imc_query) or die(mysqli_error($con));
                     while ($fila = $result_imc->fetch_array(MYSQLI_ASSOC)) { ?>
                         <tr>
