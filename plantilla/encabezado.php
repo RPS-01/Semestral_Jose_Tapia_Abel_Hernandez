@@ -138,7 +138,7 @@ function encabezado()
                 $_SESSION['usuario'] = $row['nombre'];
                 $_SESSION['cedula'] = $row['cedula'];
                 $_SESSION['apellido'] = $row['apellido'];
-                // Redirect to user dashboard page
+
                 header("Location: opciones.php");
             }
         } else {
@@ -187,15 +187,15 @@ function encabezado()
         $password = $_POST['password'];
         $query = "INSERT INTO user(nombre, apellido, telefono, password, cedula) VALUES ('$nombre','$apellido','$telefono','$password','$cedula')";
         $result = mysqli_query($con, $query) or die(mysqli_error($con));
-        echo('error:' . mysqli_error($con));
+        echo ('error:' . mysqli_error($con));
 
         if ($result) {
-                $_SESSION['usuario'] = $nombre;
-                $_SESSION['cedula'] = $cedula;
-                $_SESSION['apellido'] = $apellido;
-                // Redirect to user dashboard page
-                header("Location: opciones.php");
-            
+            $_SESSION['usuario'] = $nombre;
+            $_SESSION['cedula'] = $cedula;
+            $_SESSION['apellido'] = $apellido;
+
+            header("Location: opciones.php");
+
             echo "<div class='form'>
                   <h3>Usuario registrado correctamente.</h3><br/>
                   <p class='link'>Click here to <a href='login.php'>Login</a>.</p>
@@ -274,27 +274,66 @@ function encabezado()
 
 
 <?php function resultados()
-{?>
+{ ?>
+    <?php
+    require('db.php');
+    $cedula = $_SESSION['cedula'];
+    $user_query = "SELECT * FROM `user` WHERE cedula='$cedula'";
+    $result = mysqli_query($con, $user_query) or die(mysqli_error($con));
+    $row = mysqli_fetch_array($result);
+    $nombre = $row['nombre'];
+    $apellido = $row['apellido'];
+    $telefono = $row['telefono'];
+    $cedula = $row['cedula'];
+    $imc_query = "SELECT * FROM `imc` WHERE cedula='$cedula'";
+    $result = mysqli_query($con, $imc_query) or die(mysqli_error($con));
+    $row = mysqli_fetch_array($result);
+    $imc = $row['imc'];
+    $peso = $row['peso'];
+    $altura = $row['altura'];
+    $glucosa_query = "SELECT * FROM `glucosa` WHERE cedula='$cedula'";
+    $result = mysqli_query($con, $glucosa_query) or die(mysqli_error($con));
+    $row = mysqli_fetch_array($result);
+    $glucosa = $row['glucosa'];
+    $ayuno = $row['ayuna'];
+    $presion_query = "SELECT * FROM `presion` WHERE cedula='$cedula'";
+    $result = mysqli_query($con, $presion_query) or die(mysqli_error($con));
+    $row = mysqli_fetch_array($result);
+    $presion = $row['presion'];
+    $sistolica = $row['sistolica'];
+    $diastolica = $row['diastolica'];
+
+    ?>
     <div class="container form-style-4">
         <div class="row resultado">
             <div class="col-md-12 ">
                 <h1 class="title">Resultados IMC</h1>
                 <table>
                     <tr>
-                        <td colspan="3">Nombre</td>
+                        <td colspan="3">Nombre: <?php echo $nombre . " " . $apellido ?> </td>
                     </tr>
                     <tr>
-                        <td class="info">Cedula</td>
-                        <td class="info">Telefono</td>
-                        <td class="info">Fecha</td>
+                        <td class="info">Cedula: <br><?php echo $cedula ?></td>
+                        <td class="info">Telefono: <?php echo $telefono ?> </td>
+
+                        <td class="info">Fecha: <?php $date = date("Y-m-d");
+                                                echo $date;
+                                                ?>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="resul" colspan="3">Sus Resulados:</td>
+                        <td class="resul" colspan="3">Peso:<?php echo $peso ?>kg </td>
                     </tr>
-  
+                    <tr>
+                        <td class="resul" colspan="3">Altura:<?php echo $altura ?>m </td>
+                    </tr>
+                    <tr>
+                        <td class="resul" colspan="3">Sus Resultados:<?php echo $imc ?>% </td>
+                    </tr>
+
                     <tr>
                         <td colspan="3">Firma</td>
-                    </tr>          
+                    </tr>
                 </table>
             </div>
         </div>
@@ -304,20 +343,30 @@ function encabezado()
                 <h1 class="title">Resultados Presion</h1>
                 <table>
                     <tr>
-                        <td colspan="3">Nombre</td>
+                        <td colspan="3">Nombre: <?php echo $nombre . " " . $apellido ?> </td>
                     </tr>
                     <tr>
-                        <td class="info">Cedula</td>
-                        <td class="info">Telefono</td>
-                        <td class="info">Fecha</td>
+                        <td class="info">Cedula: <?php echo $cedula ?></td>
+                        <td class="info">Telefono: <?php echo $telefono ?> </td>
+
+                        <td class="info">Fecha: <?php $date = date("Y-m-d");
+                                                echo $date;
+                                                ?>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="resul" colspan="3">Sus Resulados:</td>
+                        <td class="resul" colspan="1">Presión sistólica: <?php echo $sistolica ?> </td>
                     </tr>
-  
+                    <tr>
+                        <td class="resul" colspan="2">Presión diastólica : <?php echo $diastolica ?> </td>
+                    </tr>
+                    <tr>
+                        <td class="resul" colspan="3">Sus Resultados: <?php echo $presion ?> </td>
+                    </tr>
+
                     <tr>
                         <td colspan="3">Firma</td>
-                    </tr>          
+                    </tr>
                 </table>
             </div>
         </div>
@@ -327,20 +376,27 @@ function encabezado()
                 <h1 class="title">Resultados Glucosa</h1>
                 <table>
                     <tr>
-                        <td colspan="3">Nombre</td>
+                        <td colspan="3">Nombre: <?php echo $nombre . " " . $apellido ?> </td>
                     </tr>
                     <tr>
-                        <td class="info">Cedula</td>
-                        <td class="info">Telefono</td>
-                        <td class="info">Fecha</td>
+                        <td class="info">Cedula: <?php echo $cedula ?></td>
+                        <td class="info">Telefono: <?php echo $telefono ?> </td>
+
+                        <td class="info">Fecha: <?php $date = date("Y-m-d");
+                                                echo $date;
+                                                ?>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="resul" colspan="3">Sus Resulados:</td>
+                        <td class="resul" colspan="3">Ayuno: <?php echo $ayuno ?></td>
                     </tr>
-  
+                    <tr>
+                        <td class="resul" colspan="3">Sus Resultados: <?php echo $glucosa ?></td>
+                    </tr>
+
                     <tr>
                         <td colspan="3">Firma</td>
-                    </tr>          
+                    </tr>
                 </table>
             </div>
         </div>

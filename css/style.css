@@ -46,11 +46,14 @@ body{
 table, th, td {
     border:1px solid black; 
     width: 100%;
-    font-size: 1.1rem;}
-  
+    font-size: larger;
+    font-size: 15px;
+  }
+
 .info{
     padding-right: 227px; 
 }
+
 .resul{
     width: 100%;
 }
