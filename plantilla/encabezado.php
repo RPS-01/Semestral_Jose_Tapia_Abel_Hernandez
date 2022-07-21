@@ -62,13 +62,15 @@ function encabezado()
                     <div class="header-text">
                         <h1 class="title">Servicios</h1>
                         <p> Para realizar sus pruebas de Indice de masa corporal, Glucosa en Sangre y presion Arterial primero debe iniciar sesion</p>
-                        <p class="subtitle">Ingrese a su cuenta</p>
+                        <p class="subtitle">Ingrese a su cuenta o registrese</p>
                         <?php 
                         if(!empty($_SESSION['usuario'])){?>
                             <a href="opciones.php" class="btn submitbutton btn-primary btn-sm">Nuestros servicios</a>
                         <?php } 
                         else{?>
                             <a href="login.php" class="btn submitbutton btn-primary btn-sm">Iniciar Sesion</a>
+                        <br><br>
+                            <a href="register.php" class="btn submitbutton btn-primary btn-sm">Registrarme</a>
                         <?php } ?>
                     </div>
                     <!-- Button -->
@@ -155,6 +157,36 @@ function encabezado()
 
 <?php } ?>
 
+
+<?php function register()
+{ ?>
+
+    <div class="container form-style-5">
+        <div class="row ">
+            <div class="col-md-12 divform ">
+                <h1 class="title">Registre sus datos</h1>
+                <form action="login.php" method="post" name="login">
+                    <div class="form-group">
+                        <label for="usuario">Nombre de Usuario</label>
+                        <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Nombre de Usuario">
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido">Cedula</label>
+                        <input type="text" class="form-control" id="cedula" name="cedula" placeholder="cedula">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="enviar" value="Enviar" />
+                    </div>    
+                </form>
+            </div>
+        </div>
+    </div>
+
+<?php } ?>
 
 
 
