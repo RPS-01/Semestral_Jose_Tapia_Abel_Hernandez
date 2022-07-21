@@ -150,4 +150,7 @@ ALTER TABLE `imc`
 --
 ALTER TABLE `presion`
   ADD CONSTRAINT `user_presion` FOREIGN KEY (`cedula`) REFERENCES `user` (`cedula`);
+
+
+INSERT INTO IMC (peso, altura, cedula, imc, fecha) VALUES (70, 1.8, '8-972-514', 18, '2022-07-12');
 COMMIT;
