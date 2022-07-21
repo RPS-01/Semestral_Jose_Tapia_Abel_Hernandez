@@ -1,7 +1,7 @@
 <?php
 include("plantilla/encabezado.php");
 session_start();
-if(!empty($_SESSION['usuario'])){ 
+if(!empty($_SESSION['usuario'])){
   encabezado();
   glucosa();
   pie();

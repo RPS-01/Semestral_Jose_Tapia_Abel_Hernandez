@@ -28,7 +28,7 @@ function encabezado()
                         <h1 class="title">Consultorio ABC</h1>
                         <?php 
                         if(!empty($_SESSION['usuario'])){
-                            echo'<h2 class="user">Bienvenido '.$_SESSION['usuario'].'</br><a href="logout.php">Cerrar sesion</a></h2>';
+                            echo'<h2 class="user">Bienvenido '.$_SESSION['usuario'].  ' ' .$_SESSION['apellido'].'</br><a href="logout.php">Cerrar sesion</a></h2>';
                         }
                         ?>
                     </div>
@@ -120,14 +120,27 @@ function encabezado()
 { ?>
 
     <?php
+    require('db.php');
     if (isset($_POST['enviar'])) {
-        if (empty($_POST['usuario']) || empty($_POST['password'])) { ?>
-            <p class="error">Contraseña o usuario incorrectos</p>
-    <?php
-        } elseif ($_POST['usuario'] == "usuario" && $_POST['password'] == "pass1234") {
-            $_SESSION['usuario'] = $_POST['usuario'];
-            $_SESSION['password'] = $_POST['password'];
-            header("location: opciones.php");
+        $cedula = $_POST['cedula'];
+        $password = $_POST['password'];
+        // Check user is exist in the database
+        $query    = "SELECT * FROM `user` WHERE cedula='$cedula'
+                     AND password='$password'";
+        $result = mysqli_query($con, $query) or die("error de mysql");
+        $rows = mysqli_num_rows($result);
+        if ($rows == 1) {
+            while($row = mysqli_fetch_array($result)){
+                $_SESSION['usuario'] = $row['nombre'];
+                $_SESSION['cedula'] = $row['cedula'];
+                $_SESSION['apellido'] = $row['apellido'];
+            // Redirect to user dashboard page
+            header("Location: opciones.php");}
+        } else {
+            echo "<div class='form'>
+                  <h3>Incorrect Username/password.</h3><br/>
+                  <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
+                  </div>";
         }
     }
     ?>
@@ -138,8 +151,8 @@ function encabezado()
                 <h1 class="title">Ingrese sus datos</h1>
                 <form action="login.php" method="post" name="login">
                     <div class="form-group">
-                        <label for="usuario">Usuario</label>
-                        <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario">
+                        <label for="cedula">Cedula</label>
+                        <input type="text" class="form-control" id="usuario" name="cedula" placeholder="Cedula">
                     </div>
                     <div class="form-group">
                         <label for="apellido">Contraseña</label>
@@ -194,10 +207,10 @@ function encabezado()
                             <label for="glucosa">Glucosa</label>
                             <input type="number" class="form-control" id="glucosa" name="glucosa" placeholder="Glucosa">
                             <p>Seleccione cuando se realizo la prueba:</p>
-                              <label for="no">Dos horas despues de comer</label><br>
-                              <input type="radio" id="no" name="ayuna" value="no">
-                              <label for="si">Sin consumir alimento</label><br>
-                              <input type="radio" id="si" name="ayuna" value="si">
+                             <label for="no">Dos horas despues de comer</label><br>
+                             <input type="radio" id="no" name="ayuna" value="no">
+                             <label for="si">Sin consumir alimento</label><br>
+                             <input type="radio" id="si" name="ayuna" value="si">
 
                         </div>
                         <button type="submit button" class="btn sumbitbutton btn-primary btn-lg">Enviar</button>
