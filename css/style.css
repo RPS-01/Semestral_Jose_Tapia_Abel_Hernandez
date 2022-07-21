@@ -46,9 +46,8 @@ body{
 table, th, td {
     border:1px solid black; 
     width: 100%;
-    font-size: larger;
-  }
-
+    font-size: 1.1rem;}
+  
 .info{
     padding-right: 227px; 
 }
