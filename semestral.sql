@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-07-2022 a las 06:25:37
+-- Tiempo de generación: 21-07-2022 a las 18:45:15
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.4
 
@@ -55,7 +55,10 @@ CREATE TABLE `imc` (
 
 INSERT INTO `imc` (`peso`, `altura`, `cedula`, `imc`, `fecha`) VALUES
 (85, 1.8, '8-972-514', 26.2, '2022-07-20'),
-(89.6, 1.8, '8-972-514', 27.7, '2022-07-20');
+(89.6, 1.8, '8-972-514', 27.7, '2022-07-20'),
+(75, 1.8, '8-972-514', 23.1, '2022-07-21'),
+(70, 1.8, '8-972-514', 18, '2022-07-12'),
+(96, 1.66, '8-972-516', 34.8, '2022-07-21');
 
 -- --------------------------------------------------------
 
@@ -150,7 +153,4 @@ ALTER TABLE `imc`
 --
 ALTER TABLE `presion`
   ADD CONSTRAINT `user_presion` FOREIGN KEY (`cedula`) REFERENCES `user` (`cedula`);
-
-
-INSERT INTO IMC (peso, altura, cedula, imc, fecha) VALUES (70, 1.8, '8-972-514', 18, '2022-07-12');
 COMMIT;
