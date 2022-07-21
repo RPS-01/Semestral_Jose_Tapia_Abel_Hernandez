@@ -48,6 +48,9 @@ function encabezado()
                             <li class="nav-item">
                                 <a class="nav-link" href="presion.php">Presion</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="resultados.php">Resultados</a>
+                            </li>
                         </ul>
                 </nav>
         </header>
@@ -269,6 +272,82 @@ function encabezado()
 
 <?php } ?>
 
+
+<?php function resultados()
+{?>
+    <div class="container form-style-4">
+        <div class="row resultado">
+            <div class="col-md-12 ">
+                <h1 class="title">Resultados IMC</h1>
+                <table>
+                    <tr>
+                        <td colspan="3">Nombre</td>
+                    </tr>
+                    <tr>
+                        <td class="info">Cedula</td>
+                        <td class="info">Telefono</td>
+                        <td class="info">Fecha</td>
+                    </tr>
+                    <tr>
+                        <td class="resul" colspan="3">Sus Resulados:</td>
+                    </tr>
+  
+                    <tr>
+                        <td colspan="3">Firma</td>
+                    </tr>          
+                </table>
+            </div>
+        </div>
+        <br><br>
+        <div class="row resultado">
+            <div class="col-md-12 ">
+                <h1 class="title">Resultados Presion</h1>
+                <table>
+                    <tr>
+                        <td colspan="3">Nombre</td>
+                    </tr>
+                    <tr>
+                        <td class="info">Cedula</td>
+                        <td class="info">Telefono</td>
+                        <td class="info">Fecha</td>
+                    </tr>
+                    <tr>
+                        <td class="resul" colspan="3">Sus Resulados:</td>
+                    </tr>
+  
+                    <tr>
+                        <td colspan="3">Firma</td>
+                    </tr>          
+                </table>
+            </div>
+        </div>
+        <br><br>
+        <div class="row resultado">
+            <div class="col-md-12 ">
+                <h1 class="title">Resultados Glucosa</h1>
+                <table>
+                    <tr>
+                        <td colspan="3">Nombre</td>
+                    </tr>
+                    <tr>
+                        <td class="info">Cedula</td>
+                        <td class="info">Telefono</td>
+                        <td class="info">Fecha</td>
+                    </tr>
+                    <tr>
+                        <td class="resul" colspan="3">Sus Resulados:</td>
+                    </tr>
+  
+                    <tr>
+                        <td colspan="3">Firma</td>
+                    </tr>          
+                </table>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
+
 <?php function glucosa()
 { ?>
     <div class="container form-style-5">
@@ -374,6 +453,10 @@ function encabezado()
         </div>
     </div>
 <?php } ?>
+
+
+
+
 
 <?php function pie()
 { ?>

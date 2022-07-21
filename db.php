@@ -1,5 +1,5 @@
   <?php
-  $db = "semestral";
+  $db = "database";
   $host = "localhost";
   $pw = "";
   $user = "root";
