@@ -26,9 +26,9 @@ function encabezado()
                     <div class="col-md-12 logotitle">
                         <img src="img/logo.png" alt="logo" class="logo">
                         <h1 class="title">Consultorio ABC</h1>
-                        <?php 
-                        if(!empty($_SESSION['usuario'])){
-                            echo'<h2 class="user">Bienvenido '.$_SESSION['usuario'].  ' ' .$_SESSION['apellido'].'</br><a href="logout.php">Cerrar sesion</a></h2>';
+                        <?php
+                        if (!empty($_SESSION['usuario'])) {
+                            echo '<h2 class="user">Bienvenido ' . $_SESSION['usuario'] .  ' ' . $_SESSION['apellido'] . '</br><a href="logout.php">Cerrar sesion</a></h2>';
                         }
                         ?>
                     </div>
@@ -63,13 +63,12 @@ function encabezado()
                         <h1 class="title">Servicios</h1>
                         <p> Para realizar sus pruebas de Indice de masa corporal, Glucosa en Sangre y presion Arterial primero debe iniciar sesion</p>
                         <p class="subtitle">Ingrese a su cuenta o registrese</p>
-                        <?php 
-                        if(!empty($_SESSION['usuario'])){?>
+                        <?php
+                        if (!empty($_SESSION['usuario'])) { ?>
                             <a href="opciones.php" class="btn submitbutton btn-primary btn-sm">Nuestros servicios</a>
-                        <?php } 
-                        else{?>
+                        <?php } else { ?>
                             <a href="login.php" class="btn submitbutton btn-primary btn-sm">Iniciar Sesion</a>
-                        <br><br>
+                            <br><br>
                             <a href="register.php" class="btn submitbutton btn-primary btn-sm">Registrarme</a>
                         <?php } ?>
                     </div>
@@ -132,12 +131,13 @@ function encabezado()
         $result = mysqli_query($con, $query) or die("error de mysql");
         $rows = mysqli_num_rows($result);
         if ($rows == 1) {
-            while($row = mysqli_fetch_array($result)){
+            while ($row = mysqli_fetch_array($result)) {
                 $_SESSION['usuario'] = $row['nombre'];
                 $_SESSION['cedula'] = $row['cedula'];
                 $_SESSION['apellido'] = $row['apellido'];
-            // Redirect to user dashboard page
-            header("Location: opciones.php");}
+                // Redirect to user dashboard page
+                header("Location: opciones.php");
+            }
         } else {
             echo "<div class='form'>
                   <h3>Incorrect Username/password.</h3><br/>
@@ -162,7 +162,7 @@ function encabezado()
                     </div>
                     <div class="form-group">
                         <input type="submit" name="enviar" value="Enviar" />
-                    </div>    
+                    </div>
                 </form>
             </div>
         </div>
@@ -174,26 +174,67 @@ function encabezado()
 <?php function register()
 { ?>
 
+    <?php
+    require('db.php');
+    if (isset($_POST['enviar'])) {
+        $nombre = $_POST['nombre'];
+        $apellido = $_POST['apellido'];
+        $telefono = $_POST['telefono'];
+        $cedula = $_POST['cedula'];
+        $password = $_POST['password'];
+        $query = "INSERT INTO user(nombre, apellido, telefono, password, cedula) VALUES ('$nombre','$apellido','$telefono','$password','$cedula')";
+        $result = mysqli_query($con, $query) or die(mysqli_error($con));
+        echo('error:' . mysqli_error($con));
+
+        if ($result) {
+                $_SESSION['usuario'] = $nombre;
+                $_SESSION['cedula'] = $cedula;
+                $_SESSION['apellido'] = $apellido;
+                // Redirect to user dashboard page
+                header("Location: opciones.php");
+            
+            echo "<div class='form'>
+                  <h3>Usuario registrado correctamente.</h3><br/>
+                  <p class='link'>Click here to <a href='login.php'>Login</a>.</p>
+                  </div>";
+        } else {
+            echo "<div class='form'>
+                  <h3>Error.</h3><br/>
+                  <p class='link'>Click here to <a href='register.php'>Register</a> again.</p>
+                  </div>";
+            header("Location: register.php");
+        }
+    }
+    ?>
     <div class="container form-style-5">
         <div class="row ">
             <div class="col-md-12 divform ">
                 <h1 class="title">Registre sus datos</h1>
-                <form action="login.php" method="post" name="login">
+                <form action="" method="post" name="login">
                     <div class="form-group">
-                        <label for="usuario">Nombre de Usuario</label>
-                        <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Nombre de Usuario">
+                        <label for="nombre">Nombre </label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
                     </div>
                     <div class="form-group">
-                        <label for="apellido">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder="apellido">
                     </div>
                     <div class="form-group">
-                        <label for="apellido">Cedula</label>
+                        <label for="telefono">Telefono</label>
+                        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="telefono">
+                    </div>
+                    <div class="form-group">
+                        <label for="cedula">Cedula</label>
                         <input type="text" class="form-control" id="cedula" name="cedula" placeholder="cedula">
                     </div>
                     <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+                    </div>
+
+                    <div class="form-group">
                         <input type="submit" name="enviar" value="Enviar" />
-                    </div>    
+                    </div>
                 </form>
             </div>
         </div>
@@ -229,123 +270,123 @@ function encabezado()
 <?php } ?>
 
 <?php function glucosa()
-    { ?>
-        <div class="container form-style-5">
-            <div class="row ">
-                <div class="col-md-12 divform ">
-                    <h1 class="title">Glucosa</h1>
-                    <form action="glucosaResultados.php" method="POST">
-                        <div class="form-group">
-                            <label for="glucosa">Glucosa</label>
-                            <input type="number" class="form-control" id="glucosa" name="glucosa" placeholder="Glucosa">
-                            <p>Seleccione cuando se realizo la prueba:</p>
-                             <label for="no">Dos horas despues de comer</label><br>
-                             <input type="radio" id="no" name="ayuna" value="no">
-                             <label for="si">Sin consumir alimento</label><br>
-                             <input type="radio" id="si" name="ayuna" value="si">
+{ ?>
+    <div class="container form-style-5">
+        <div class="row ">
+            <div class="col-md-12 divform ">
+                <h1 class="title">Glucosa</h1>
+                <form action="glucosaResultados.php" method="POST">
+                    <div class="form-group">
+                        <label for="glucosa">Glucosa</label>
+                        <input type="number" class="form-control" id="glucosa" name="glucosa" placeholder="Glucosa">
+                        <p>Seleccione cuando se realizo la prueba:</p>
+                        <label for="no">Dos horas despues de comer</label><br>
+                        <input type="radio" id="no" name="ayuna" value="no">
+                        <label for="si">Sin consumir alimento</label><br>
+                        <input type="radio" id="si" name="ayuna" value="si">
 
-                        </div>
-                        <button type="submit button" class="btn sumbitbutton btn-primary btn-lg">Enviar</button>
-                </div>
+                    </div>
+                    <button type="submit button" class="btn sumbitbutton btn-primary btn-lg">Enviar</button>
             </div>
         </div>
+    </div>
 <?php } ?>
 
 <?php function presion()
-    { ?>
-        <div class="container form-style-5">
-            <div class="row ">
-                <div class="col-md-12 divform ">
-                    <h1 class="title">IMC</h1>
-                    <form action="presionResultados.php" method="POST">
-                        <div class="form-group">
-                            <label for="presion">Ingrese su presión sistólica</label>
-                            <input type="number" class="form-control" id="presion" name="sistolica" placeholder="Presion">
-                        </div>
-                        <div class="form-group">
-                            <label for="presion">Ingrese su presión diastólica</label>
-                            <input type="number" class="form-control" id="presion" name="diastolica" placeholder="Presion">
-                        </div>
-                        <button type="submit button" class="btn sumbitbutton btn-primary btn-lg">Enviar</button>
-                </div>
+{ ?>
+    <div class="container form-style-5">
+        <div class="row ">
+            <div class="col-md-12 divform ">
+                <h1 class="title">IMC</h1>
+                <form action="presionResultados.php" method="POST">
+                    <div class="form-group">
+                        <label for="presion">Ingrese su presión sistólica</label>
+                        <input type="number" class="form-control" id="presion" name="sistolica" placeholder="Presion">
+                    </div>
+                    <div class="form-group">
+                        <label for="presion">Ingrese su presión diastólica</label>
+                        <input type="number" class="form-control" id="presion" name="diastolica" placeholder="Presion">
+                    </div>
+                    <button type="submit button" class="btn sumbitbutton btn-primary btn-lg">Enviar</button>
             </div>
         </div>
+    </div>
 <?php } ?>
 
 <?php function imc()
-        { ?>
-            <div class="container form-style-5">
-                <div class="row ">
-                    <div class="col-md-12 divform ">
-                        <h1 class="title">IMC</h1>
-                        <form action="imcResultados.php" method="POST">
-                            <div class="form-group">
-                                <label for="peso">Ingrese su Peso en KG</label>
-                                <input type="text" class="form-control" id="peso" name="peso" placeholder="Peso">
-                            </div>
-                            <div class="form-group">
-                                <label for="altura">Ingrese su Altura en Metros</label>
-                                <input type="text" class="form-control" id="altura" name="altura" placeholder="Altura">
-                            </div>
-                            <button type="submit button" class="btn sumbitbutton btn-primary btn-lg">Enviar</button>
+{ ?>
+    <div class="container form-style-5">
+        <div class="row ">
+            <div class="col-md-12 divform ">
+                <h1 class="title">IMC</h1>
+                <form action="imcResultados.php" method="POST">
+                    <div class="form-group">
+                        <label for="peso">Ingrese su Peso en KG</label>
+                        <input type="text" class="form-control" id="peso" name="peso" placeholder="Peso">
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="altura">Ingrese su Altura en Metros</label>
+                        <input type="text" class="form-control" id="altura" name="altura" placeholder="Altura">
+                    </div>
+                    <button type="submit button" class="btn sumbitbutton btn-primary btn-lg">Enviar</button>
             </div>
+        </div>
+    </div>
 <?php } ?>
 
 <?php function ResultadosGlucosa($glucosa, $resultado)
-            { ?>
-                <div class="container form-style-5">
-                    <div class="row ">
-                        <div class="col-md-12 divform ">
-                            <h1 class="title">Resultados</h1>
-                            <p>La glucosa es: <?php echo $glucosa ?></p>
-                            <p>El resultado es: <?php echo $resultado ?></p>
-                        </div>
-                    </div>
-                </div>
+{ ?>
+    <div class="container form-style-5">
+        <div class="row ">
+            <div class="col-md-12 divform ">
+                <h1 class="title">Resultados</h1>
+                <p>La glucosa es: <?php echo $glucosa ?></p>
+                <p>El resultado es: <?php echo $resultado ?></p>
+            </div>
+        </div>
+    </div>
 <?php } ?>
 
 <?php function ResultadosIMC($peso, $altura, $resultado, $imc)
-            { ?>
-                <div class="container form-style-5">
-                    <div class="row ">
-                        <div class="col-md-12 divform ">
-                            <h1 class="title">Resultados</h1>
-                            <p>El peso es: <?php echo $peso ?></p>
-                            <p>La altura es: <?php echo $altura ?></p>
-                            <p>Según su indice de masa corporal de: <?php echo $imc ?> ,su resultado es: <?php echo $resultado ?></p>
-                        </div>
-                    </div>
-                </div>
+{ ?>
+    <div class="container form-style-5">
+        <div class="row ">
+            <div class="col-md-12 divform ">
+                <h1 class="title">Resultados</h1>
+                <p>El peso es: <?php echo $peso ?></p>
+                <p>La altura es: <?php echo $altura ?></p>
+                <p>Según su indice de masa corporal de: <?php echo $imc ?> ,su resultado es: <?php echo $resultado ?></p>
+            </div>
+        </div>
+    </div>
 <?php } ?>
 
 <?php function ResultadosPresion($sistolica, $diastolica, $resultado)
-            { ?>
-                <div class="container form-style-5">
-                    <div class="row ">
-                        <div class="col-md-12 divform ">
-                            <h1 class="title">Resultados</h1>
-                            <p>La presion sistolica es: <?php echo $sistolica ?></p>
-                            <p>La presion diastolica es: <?php echo $diastolica ?></p>
-                            <p>El resultado es: <?php echo $resultado ?></p>
-                        </div>
-                    </div>
-                </div>
+{ ?>
+    <div class="container form-style-5">
+        <div class="row ">
+            <div class="col-md-12 divform ">
+                <h1 class="title">Resultados</h1>
+                <p>La presion sistolica es: <?php echo $sistolica ?></p>
+                <p>La presion diastolica es: <?php echo $diastolica ?></p>
+                <p>El resultado es: <?php echo $resultado ?></p>
+            </div>
+        </div>
+    </div>
 <?php } ?>
 
 <?php function pie()
-            { ?>
-                <footer>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p> 2022 - Elaborado por Jose Tapia y Abel Hernandez</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-                </body>
+{ ?>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p> 2022 - Elaborado por Jose Tapia y Abel Hernandez</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    </body>
 
     </html>
 <?php } ?>
@@ -418,8 +459,8 @@ function encabezado()
             <div class="row">
                 <div class="col-md-12">
                     <p> 2022 - Elaborado por Jose Tapia y Abel Hernandez</a></p>
-                    
-                    <?php 
+
+                    <?php
                     echo $mensaje;
 
                     ?>
@@ -431,4 +472,3 @@ function encabezado()
 
     </html>
 <?php } ?>
-
