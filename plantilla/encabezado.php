@@ -762,7 +762,7 @@ function encabezado()
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p> 2022 - Elaborado por Jose Tapia y Abel Hernandez</a></p>
+                    <p> 2022 - Elaborado por Jose Tapia, Abel Hernandez, Eynar Sanchez, Fernando Salazar y Erwin Rodriguez</a></p>
                 </div>
             </div>
         </div>
@@ -787,7 +787,7 @@ function encabezado()
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p> 2022 - Elaborado por Jose Tapia y Abel Hernandez</a></p>
+                    <p> 2022 - Elaborado por Jose Tapia, Abel Hernandez, Eynar Sanchez, Fernando Salazar y Erwin Rodriguez</a></p>
                     <p> <?php echo $mensaje ?> </p>
                 </div>
             </div>
@@ -813,7 +813,7 @@ function encabezado()
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p> 2022 - Elaborado por Jose Tapia y Abel Hernandez</a></p>
+                    <p> 2022 - Elaborado por Jose Tapia, Abel Hernandez, Eynar Sanchez, Fernando Salazar y Erwin Rodriguez</a></p>
                     <?php echo $mensaje ?>
                 </div>
             </div>
@@ -839,7 +839,7 @@ function encabezado()
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p> 2022 - Elaborado por Jose Tapia y Abel Hernandez</a></p>
+                    <p> 2022 - Elaborado por Jose Tapia, Abel Hernandez, Eynar Sanchez, Fernando Salazar y Erwin Rodriguez</a></p>
 
                     <?php
                     echo $mensaje;
