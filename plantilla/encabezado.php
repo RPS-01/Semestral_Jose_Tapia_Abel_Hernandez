@@ -272,8 +272,28 @@ function encabezado()
 
 <?php } ?>
 
-
 <?php function resultados()
+{ ?>
+    <div class="container form-style-5">
+        <div class="row ">
+            <div class="col-md-12 divform ">
+                <h1 class="title">Escoga el tipo de reporte que desea</h1>
+                <ul class="navbar-nav ">
+                    <li class="opcion">
+                        <a class="navlink" href="semanal.php">Semanal</a>
+                    </li>
+                    <li class="opcion">
+                        <a class="navlink" href="mensual.php">Mensual</a>
+                    </li>
+                </ul>
+            </div>  
+        </div>
+    </div>
+
+
+<?php } ?>
+
+<?php function x()
 { ?>
     <?php
     require('db.php');
@@ -447,7 +467,7 @@ function encabezado()
     <div class="container form-style-5">
         <div class="row ">
             <div class="col-md-12 divform ">
-                <h1 class="title">IMC</h1>
+                <h1 class="title">Presion</h1>
                 <form action="presionResultados.php" method="POST">
                     <div class="form-group">
                         <label for="presion">Ingrese su presión sistólica</label>
